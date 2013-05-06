@@ -772,7 +772,9 @@ native_type_props_test_() ->
 		      is_float(X))),
      ?_shrinksTo(0, ?LETSHRINK([X],[my_native_type()],{'tag',X})),
      ?_passes(weird_types:prop_export_all_works()),
-     ?_passes(weird_types:prop_no_auto_import_works())].
+     ?_passes(weird_types:prop_no_auto_import_works()),
+     ?_passes(?FORALL(X, native_type_test:my_integer(), is_integer(X))),
+     ?_passes(?FORALL(X, native_type_test:my_boolean(), is_boolean(X)))].
 
 -type bin4()   :: <<_:32>>.
 -type bits42() :: <<_:42>>.

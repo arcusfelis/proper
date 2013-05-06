@@ -358,7 +358,7 @@
 -export([get_size/1, global_state_init_size/1,
 	 global_state_init_size_seed/2,report_error/2]).
 -export([pure_check/1, pure_check/2]).
--export([forall/2, implies/2, whenfail/2, trapexit/1, timeout/2]).
+-export([forall/2, implies/2, whenfail/2, trapexit/1, timeout/2, native_type/1]).
 
 -export_type([test/0, outer_test/0, counterexample/0, exception/0, false_positive_mfas/0]).
 
@@ -922,6 +922,10 @@ on_output(Print, Test) ->
 -spec forall(proper_types:raw_type(), dependent_test()) -> forall_clause().
 forall(RawType, DTest) ->
     {forall, RawType, DTest}.
+
+%% @private
+-spec native_type(term()) -> no_return().
+native_type(_) -> error(disabled_native_types).
 
 %% @doc Returns a property that is true only if all of the sub-properties
 %% `SubProps' are true. Each sub-property should be tagged with a distinct atom.

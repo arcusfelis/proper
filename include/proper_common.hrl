@@ -53,3 +53,5 @@
 	proper_types:add_constraint(RawType,fun(X) -> Condition end,true)).
 -define(SUCHTHATMAYBE(X,RawType,Condition),
 	proper_types:add_constraint(RawType,fun(X) -> Condition end,false)).
+
+-define(NATIVE_TYPE(X), proper:native_type(X)).

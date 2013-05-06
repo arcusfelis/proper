@@ -277,6 +277,10 @@ rewrite_expr({call,Line,
     NewRawType = rewrite_type(RawType, ModInfo),
     NewProp = rewrite_expr(Prop, ModInfo),
     {call,Line,FunRef,[NewRawType,NewProp]};
+rewrite_expr({call,_,
+	      {remote,_,{atom,_,proper},{atom,_,native_type}},
+	      [RawType]}, ModInfo) ->
+    rewrite_type(RawType, ModInfo);
 rewrite_expr({call,Line,FunRef,Args}, ModInfo) ->
     NewFunRef = rewrite_expr(FunRef, ModInfo),
     NewArgs = [rewrite_expr(A,ModInfo) || A <- Args],
